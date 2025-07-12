@@ -1,0 +1,40 @@
+<%= form_with model: school do |form| %>
+    <div class="mt-4">
+			<%= form.label :name_ar %>
+			<div class="border rounded-lg">
+				<%= form.text_field :name_ar %>
+			</div>
+			<% if !school.errors.empty? %>
+				<p class="text-red-500"><%= school.errors[:name_ar][0] %></p>
+			<% end %>
+    </div>
+
+    <div class="mt-2">
+			<%= form.label :name_en %>
+			<div class="border rounded-lg">
+				<%= form.text_field :name_en %>
+			</div>
+			<% if !school.errors.empty? %>
+				<p class="text-red-500"><%= school.errors[:name_en][0] %></p>
+			<% end %>
+    </div>
+
+    <div class="mt-2">
+      <%= form.label :status %>
+			<div class="border rounded-lg">
+      	<%= form.select :status, School.statuses.keys.map { |s| [s, s] } %>
+			</div>
+    </div>
+
+		<div class="mt-2">
+      <%= form.label :address %>
+			<div class="border rounded-lg">
+	      <%= form.text_field :address %>
+			</div>
+    </div>
+
+    <div class="flex justify-center gap-1 mt-4"> 
+   	  <%= form.submit 'Save', class: "px-3 py-1 border rounded-lg bg-[#3490D1] text-white" %>
+			<%= link_to 'Cancel', schools_path, class: "px-3 py-1 border rounded-lg" %>
+    </div>
+<% end %>

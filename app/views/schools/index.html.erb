@@ -1,0 +1,67 @@
+<section class="flex justify-center flex-col mt-10">
+<div class="flex justify-between">
+    <h1 class="text-3xl font-bold text-[#64748B]">All Schools</h1>
+
+    <button class="bg-[#3490D1] text-white rounded-2xl p-3">
+        <%= link_to "new school", new_school_path %>
+    </button>
+</div>
+<div class="rounded-2xl bg-white p-3">
+	<%= form_tag(schools_path, method: :get) do %>
+		<div class="flex gap-2 mb-2">
+			<div class="border rounded-lg">
+				<%= text_field_tag :search %>
+			</div>
+				<%= submit_tag "Search", class: "ml-2 px-3 py-1 border rounded-lg bg-[#3490D1] text-white" %>
+				<%= link_to "Clear", schools_path, class: "ml-1 px-3 py-1 border rounded-lg" %>
+		</div>
+  <% end %>
+    <div class="grid grid-cols-6 bg-[#f1f5f9] gap-2 p-2 rounded-xl font-bold">
+        <p>ID</p>
+        <p>Arabic Name</p>
+        <p>English Name</p>
+        <p>Status</p>
+        <p>Address</p>
+        <p>Actions</p>
+    </div>
+    <% if @schools.empty? %>
+        <p class="mx-auto p-2">There is Schools yet</p>
+    <% else %>
+    <% @schools.each do |school| %>
+        <div class="grid grid-cols-6 gap-2 p-2 items-center">
+            <p><%= school.id %> </p>
+            <p><%= school.name_ar %> </p>
+            <p><%= school.name_en %> </p>
+            <p><%= school.status %> </p>
+            <p><%= school.address %> </p>
+            <div class="flex">
+                <%= link_to school do %>
+                    <svg width="35" height="35" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="cursor-pointer pt-3">
+                        <g clip-path="url(#wcootrja8a)">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M2.248 7.799c.433-.607 1.193-1.551 2.201-2.338C5.46 4.673 6.663 4.083 8 4.083c1.337 0 2.541.59 3.55 1.378 1.009.787 1.77 1.731 2.202 2.338a7.854 7.854 0 0 1 .14.201 8.128 8.128 0 0 1-.14.201c-.432.607-1.193 1.552-2.201 2.338-1.01.789-2.214 1.378-3.551 1.378-1.337 0-2.541-.59-3.55-1.377S2.68 8.808 2.247 8.2a8.02 8.02 0 0 1-.14-.2l.019-.03c.03-.046.069-.099.121-.172zM8 2.583c-1.789 0-3.311.788-4.474 1.695-1.164.91-2.021 1.98-2.5 2.65l-.038.054C.823 7.209.583 7.54.583 8c0 .46.24.79.405 1.018.013.02.026.037.039.054.478.67 1.335 1.741 2.5 2.65C4.688 12.63 6.21 13.417 8 13.417c1.79 0 3.311-.787 4.474-1.695 1.164-.909 2.021-1.98 2.5-2.65l.038-.053c.165-.228.405-.56.405-1.019 0-.46-.24-.79-.405-1.018l-.039-.054c-.478-.67-1.335-1.74-2.5-2.65C11.312 3.371 9.79 2.584 8 2.584zM6.75 8a1.25 1.25 0 1 0 2.5 0 1.25 1.25 0 0 0-2.5 0zM8 10.75a2.75 2.75 0 1 1 0-5.5 2.75 2.75 0 0 1 0 5.5z" fill="currentColor"/>
+                        </g>
+                    </svg>
+                <% end %>
+
+                <%= link_to edit_school_path(school) do %>
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="cursor-pointer">
+                        <g clip-path="url(#wcootrja8a)">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M21.769 13.662c.716-.426 1.6-.439 2.328-.035.302.168.577.45.987.87l.112.113c.411.42.686.7.85 1.008.392.737.38 1.629-.034 2.354-.126.22-.31.425-.564.677-.119.117-.178.176-.253.176-.075 0-.135-.06-.254-.18l-3.865-3.864c-.117-.117-.175-.175-.177-.249 0-.073.056-.133.168-.252.264-.28.474-.482.702-.618zm2.475 6.074c-.001.076-.064.136-.189.257l-4.738 4.563c-.834.804-1.35 1.3-2 1.554-.652.255-1.361.236-2.508.206-.002 0-.633-.016-.773-.04a.825.825 0 0 1-.504-.26.842.842 0 0 1-.198-.529c-.008-.142.044-.8.044-.804v-.001c.078-1.005.126-1.619.368-2.177.243-.56.658-1.009 1.336-1.742l4.67-5.061c.121-.13.181-.196.259-.197.077-.002.14.06.265.186l3.784 3.784c.123.123.184.184.184.26zm-3.355 5.388a.605.605 0 0 0 0 1.209h4.837a.605.605 0 0 0 0-1.21h-4.837z" fill="currentColor"></path>
+                        </g>
+                    </svg>
+                <% end %>
+
+                <%= button_to school, method: :delete, data: { turbo_confirm: "Are you sure?" } do %>
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="cursor-pointer">
+                        <g clip-path="url(#2xsf5fpoma)">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M21.933 13.23a1.996 1.996 0 0 0-1.035-.375c-.23-.02-.508-.02-.816-.021h-.165c-.264-.001-.528-.002-.79.022a1.996 1.996 0 0 0-1.055.391 1.987 1.987 0 0 0-.514.618c-.122.213-.243.48-.381.782l-.237.52H14a.667.667 0 0 0 0 1.333h.58l.354 5.93c.05.837.09 1.5.172 2.031.085.544.221.997.494 1.393.25.363.572.669.945.899.408.251.864.361 1.407.414h4.083c.542-.053.998-.163 1.405-.414.374-.229.695-.535.945-.896.273-.396.41-.848.495-1.391.083-.53.124-1.193.175-2.028l.363-5.938H26a.667.667 0 1 0 0-1.333h-2.879l-.284-.587a10.136 10.136 0 0 0-.39-.754 1.986 1.986 0 0 0-.514-.595zm-.293 1.937a9.21 9.21 0 0 0-.336-.655.614.614 0 0 0-.525-.329 9.486 9.486 0 0 0-.756-.016c-.367 0-.598 0-.776.017a.613.613 0 0 0-.531.342c-.083.145-.173.34-.31.64h3.234zm-3.807 8.307a.5.5 0 1 0 1 0v-4a.5.5 0 1 0-1 0v4zm3.834-4.5a.5.5 0 0 1 .5.5v4a.5.5 0 1 1-1 0v-4a.5.5 0 0 1 .5-.5z" fill="currentColor"></path>
+                        </g>
+                    </svg> 
+                <% end %>
+            </div>
+        </div>
+        <div class="w-full h-[1px] bg-[#f1f5f9]"></div>
+    <% end %>
+    <% end %>
+</div>
+</section>

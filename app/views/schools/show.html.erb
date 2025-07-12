@@ -1,0 +1,29 @@
+<section class="flex justify-center items-center flex-col mt-10 bg-white rounded-2xl mx-auto px-12 w-fit py-5">
+  <h1 class="text-3xl font-bold text-[#64748B]">School Details</h1>
+	<div class="mt-4">
+		<div class="flex gap-2">
+			<p>Arabic Name:</p>
+			<p><%= @school.name_ar %></p>
+		</div>
+
+		<div class="flex gap-2">
+			<p>English Name:</p>
+			<p><%= @school.name_en %></p>
+		</div>
+
+		<div class="flex gap-2">
+			<p>Status:</p>
+			<p><%= @school.status %></p>
+		</div>
+
+		<div class="flex gap-2">
+			<p>Address:</p>
+			<p><%= @school.address %></p>
+		</div>
+	</div>
+	<div class="flex gap-1 mt-4">
+		<%= link_to 'Cancel', schools_path, class: "ml-1 px-3 py-1 border rounded-lg" %>
+		<%= link_to 'Edit', edit_school_path(@school), class: "ml-1 px-3 py-1 border rounded-lg bg-[#3490D1] text-white" %>
+		<%= button_to "delete", @school, method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "ml-1 px-3 py-1 border rounded-lg bg-red-500 text-white" %>
+	</div>
+</section>
